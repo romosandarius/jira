@@ -76,6 +76,7 @@ from jira.resources import Status
 from jira.resources import User
 from jira.resources import Version
 from jira.resources import Votes
+from jira.resources import Voters
 from jira.resources import Watchers
 from jira.resources import Worklog
 
@@ -1508,6 +1509,14 @@ class JIRA(object):
         :param issue: ID or key of the issue to get the watchers for
         """
         return self._find_for_resource(Watchers, issue)
+	
+    @translate_resource_args
+    def voters(self, issue):
+        """Get a voters Resource from the server for an issue.
+
+        :param issue: ID or key of the issue to get the watchers for
+        """
+        return self._find_for_resource(Voters, issue)
 
     @translate_resource_args
     def add_watcher(self, issue, watcher):
