@@ -36,6 +36,7 @@ __all__ = (
     'Dashboard',
     'Filter',
     'Votes',
+	'Voters',
     'Watchers',
     'Worklog',
     'IssueLink',
@@ -576,6 +577,14 @@ class Watchers(Resource):
     def delete(self, username):
         """Remove the specified user from the watchers list."""
         super(Watchers, self).delete(params={'username': username})
+		
+class Voters(Resource):
+    """Watcher information on an issue."""
+
+    def __init__(self, options, session, raw=None):
+        Resource.__init__(self, 'issue/{0}/voters', options, session)
+        if raw:
+            self._parse_raw(raw)
 
 
 class TimeTracking(Resource):
@@ -929,6 +938,7 @@ resource_class_map = {
     r'issue/[^/]+$': Issue,
     r'issue/[^/]+/comment/[^/]+$': Comment,
     r'issue/[^/]+/votes$': Votes,
+	r'issue/[^/]+/voters$': Voters,
     r'issue/[^/]+/watchers$': Watchers,
     r'issue/[^/]+/worklog/[^/]+$': Worklog,
     r'issueLink/[^/]+$': IssueLink,
